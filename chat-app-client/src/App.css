@@ -3,7 +3,8 @@
   padding: 0;
 }
 .App{
-  background-color:#dddedd;
+  background-color:#988570;
+  /* background: url(./img/main-bg.jpg); */
   min-height: 100vh;
   display: flex;
   justify-content: center;

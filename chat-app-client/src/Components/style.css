@@ -1,5 +1,6 @@
 .main-container{
-    background-color: #f4f5f8;
+    /* background-color: #f4f5f8; */
+    background: url(../img/main-bg.jpg);
     height: 90vh;
     width: 90vw;
     display: flex;
@@ -44,6 +45,8 @@
     padding: 5px 10px;
     margin: 10px;
     flex:1;
+    overflow: scroll;
+    scrollbar-width: none;
 }
 
 .conversation-container{
@@ -55,6 +58,7 @@
     margin: 5px;
     border-radius: 20px;
     transition-duration: 0.5s;
+    
 }
 
 .conversation-container:hover{
@@ -71,7 +75,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: #d9d9d9;
+    background-color: #988570;
 
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 2rem;
@@ -79,7 +83,7 @@
     color: white;
     height: 32px;
     width: 32px;
-    padding: 2px;
+    padding: 2px 2px 5px 2px;
     border-radius: 5px;
 }
 
@@ -89,6 +93,7 @@
     font-weight: bold;
     color: rgba(0, 0, 0, 0.54);
     padding-left: 10px;
+    padding-right: 10px;
 }
 
 .con-timeStamp{
@@ -99,7 +104,7 @@
 }
 .con-lastMessage{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     padding: 10px;
 }
 
@@ -114,9 +119,9 @@
     align-items: center;
     gap: 10px;
     background-color: white;
-    padding: 10px 10px;
+    padding: 12px 20px;
     margin: 10px;
-    border-radius: 20px;
+    border-radius: 15px;
 }
 
 
@@ -137,9 +142,10 @@
 }
 
 .other-text-content{
-    background-color: #f4f5f8;
+    background-color: #988570;
     padding: 10px 10px;
     margin: 5px;
+    font-size: 18px;
     border-radius: 20px;
     width: max-content;
     margin-top: -3px;
@@ -147,7 +153,7 @@
     flex-direction: column;
 }
 
-.message-container{
+.messages-container{
     flex: 1;
     background-color: white;
     padding: 10px 10px;
@@ -168,7 +174,7 @@
 .messageBox{
     display: flex;
     flex-direction: column;
-    background-color: #63d7b0;
+    background-color: #988570;
     width: max-content;
     padding: 10px 10px;
     margin: 5px;
@@ -198,9 +204,22 @@
 }
 
 .welcome-container img{
-    height: 10rem;
+    height: 15rem;
 }
 
+.welcome-container b{
+    font-size: x-large;
+}
+
+.welcome-container p{
+    font-family: cursive;
+    font-weight: 1000;
+    font-size: 1.3rem;
+}
+
+.welcome-logo{
+    height: 16rem;
+}
 /* Create Groups */
 .createGroups-container{
     flex: 0.7;
@@ -221,30 +240,49 @@
     height: 40rem;
     width: 70rem;
 }
+.login-heading{
+    font-family:cursive;
+    font-weight:900;
+    font-size: 5rem;
+
+}
 .image-container{
     border-radius: 20px;
     flex: 0.3;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:#f4f5f8;
+    /* background-color:#f4f5f8; */
+    background: url(../img/main-bg.jpg);
     padding: 6rem;
+    border: 1px solid rgba(130, 49, 49, 0.727);
 }
+
 .login-box{
     flex: 0.7;
     background-color: white;
     border-radius: 20px;
     margin: 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #63d7b0;
+    color: #BD906E;
     display: flex;
-    justify-content: center;
+    justify-content:space-between;
     align-items: center;
     flex-direction: column;
     gap: 10px;
     padding: 2rem;
 }
 
+.login-box button{
+    border: 1px solid #BD906E;
+    color: #BD906E;
+}
+
+.login-text{
+    font-size: 1.75rem;
+    font-weight: bold;
+    padding: 0.5rem;
+}
 /* Active Users */
 .list-container{
     flex: 0.7;
@@ -254,7 +292,7 @@
     border-radius: 20px;
     padding: 10px 5px;
     margin: 10px;
-    display: flex;
+    display: flex; 
     align-items: center;
 }
 
@@ -272,13 +310,16 @@
     padding: 10px;
 }
 
+#grp-list{
+    /* margin: 2rem; */
+}
 
 .list-item{
     display: flex;
     align-items: center;
     background-color: white;
-    border-radius: 20px;
-    padding: 10px 5px;
+    border-radius: 13px;
+    padding: 10px 20px;
     margin: 10px;
     transition-duration: 0.5s ;
 }
@@ -322,4 +363,19 @@
         width: 100vw;
     }
     /* full optimization not done */
+}
+
+@media screen and (max-width:1140px){
+    .image-container{
+        display: none;
+    }
+    .login-container{
+        margin:1rem;
+    }
+    .login-box{
+        flex: 1;
+    }
+    .login-text{
+        font-size: 1.5rem;
+    }
 }

@@ -1,41 +1,47 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './style.css'
 import { IconButton } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
+// import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import NightlightIcon from '@mui/icons-material/Nightlight';
-import SearchIcon from '@mui/icons-material/Search';
-import ConversationsItem from './ConversationsItem';
+// import SearchIcon from '@mui/icons-material/Search';
+// import ConversationsItem from './ConversationsItem';
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import { myContext } from "./MainContainer"; 
 
 function Sidebar() {
-  const [conversations,setConverations] = useState([
-    {
-        name: "T1",
-        lastMessage:"Last Message 1",
-        timeStamp:"today",
-    },
-    {
-        name: "T2",
-        lastMessage:"Last Message 2",
-        timeStamp:"today",
-    },
-    {
-        name: "T3",
-        lastMessage:"Last Message 3",
-        timeStamp:"today",
-    }
-  ])
   const navigate=useNavigate();
-  const [lightTheme,setLightTheme] =useState(true);
+  const { refresh, setRefresh } = useContext(myContext);
+  const [conversations, setConversations] = useState([]);
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  const nav = useNavigate();
+  if (!userData) {
+    console.log("User not Authenticated");
+    nav("/");
+  }
+
+  const user = userData.data;
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+
+    axios.get("http://localhost:8080/chat/", config).then((response) => {
+      setConversations(response.data);
+    });
+  });
+
   return (
     <div className='sidebar-container'>
         <div className='sb-header'>
             <div>
-                <IconButton>
+                <IconButton onClick={() => {nav("/app/welcome");}}>
                     <AccountCircleIcon />
                 </IconButton>
             </div>
@@ -49,25 +55,125 @@ function Sidebar() {
                 <IconButton onClick={()=>{navigate("create-groups")}}>
                     <AddCircleIcon />
                 </IconButton>
-                <IconButton onClick={()=>{setLightTheme((prevValue)=>{
-                    return !prevValue; //toggles setLight's value
-                })}}>
-                    {lightTheme && <NightlightIcon />}
-                    {!lightTheme && <LightModeRoundedIcon />}
+                <IconButton>
+                    <NightlightIcon />
+                    {/* {lightTheme && <NightlightIcon />}
+                    {!lightTheme && <LightModeRoundedIcon />} */}
                 </IconButton>
             </div>
         </div>
-        <div className='sb-search'>
+        {/* <div className='sb-search'>
             <IconButton>
                 <SearchIcon />
             </IconButton>
             <input placeholder='Search' className='search-box'/>
-        </div>
+        </div> */}
         <div className='sb-conversations'>
             {/* fetching data from the conversations array */}
-            {conversations.map((conversation)=>{
-                return <ConversationsItem props={conversation} key={conversation.name}/>
-            })}
+            {/* {conversations.map((conversation, index) => {
+          if (conversation.users.length === 1) {
+            return <div key={index}></div>;
+          }
+          if (conversation.latestMessage === undefined) {
+            return (
+              <div
+                key={index}
+                onClick={() => {
+                  setRefresh(!refresh);
+                }}
+              >
+                <div
+                  key={index}
+                  className="conversation-container"
+                  onClick={() => {
+                    navigate(
+                      "chat/" +
+                        conversation._id +
+                        "&" +
+                        conversation.users[1].name
+                    );
+                  }}
+                >
+                <p className={"con-icon"}>
+                  {conversation.users[1].name[0]}
+                </p>
+                <p className={"con-title"}>
+                  {conversation.users[1].name}
+                </p>
+
+                <p className="con-lastMessage">
+                  No previous Messages, click here to start a new chat
+                </p>
+              </div>
+            </div>
+          );
+        } else {
+          return (
+            <div
+              key={index}
+              className="conversation-container"
+              onClick={() => {
+                navigate(
+                  "chat/" +
+                    conversation._id +
+                    "&" +
+                    conversation.users[1].name
+                );
+            }}
+            >
+            <p className={"con-icon"}>
+                  {conversation.users[1].name[0]}
+                </p>
+                <p className={"con-title"}>
+                  {conversation.users[1].name}
+                </p>
+
+                <p className="con-lastMessage">
+                  {conversation.latestMessage.content}
+                </p>
+              </div>
+            );
+          }
+        })} */}
+        {conversations.map((conversation,index)=>{
+          var chatName="";
+          if(conversation.isGroupChat){
+            chatName=conversation.chatName;
+          } else{
+            // eslint-disable-next-line
+            conversation.users.map((user)=>{
+              if(user._id!==userData.data._id){
+                chatName=user.name;
+              }
+            });
+          }
+          if(conversation.latestMessage===undefined){
+            return(
+              <div key={index} onClick={()=>{
+                setRefresh(!refresh);
+              }}>
+              <div key={index} className='conversation-container' onClick={()=>{
+                navigate("chat/"+conversation._id+"&"+chatName);
+              }}>
+              <p className='con-icon'>{chatName[0]}</p>
+              <p className='con-title'>{chatName}</p>
+              <p className='con-lastMessage'>No previous Messages, click here to start a new chat</p>
+              </div>
+              </div>
+            );
+          }
+          else{
+            return(
+              <div key={index} className='conversation-container' onClick={()=>{
+                navigate("chat/"+conversation._id+"&"+chatName);
+              }}>
+                <p className='con-icon'>{chatName[0]}</p>
+                <p className='con-title'>{chatName}</p>
+                <p className='con-lastMessage'>{conversation.latestMessage.content}</p>
+              </div>
+            );
+          }
+        })}
         </div>
     </div>
   )

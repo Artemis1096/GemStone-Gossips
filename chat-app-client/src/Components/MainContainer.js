@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { createContext,useState} from 'react'
 import './style.css'
 import Sidebar from './Sidebar'
-import ChatArea from './ChatArea'
-import Welcome from './Welcome'
-import CreateGroups from './CreateGroups'
-import User_Groups from './User'
 import { Outlet } from 'react-router-dom'
 
+export const myContext = createContext();
 function MainContainer() {
+  const [refresh, setRefresh] = useState(true);
   return (
     <div className='main-container'>
+      <myContext.Provider value={{ refresh: refresh, setRefresh: setRefresh }}>
         <Sidebar />
         <Outlet />
+      </myContext.Provider>
     </div>
   )
 }

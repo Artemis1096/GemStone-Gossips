@@ -5,8 +5,12 @@ const messageModel = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
     },
+    content:{
+        type:String,
+        trim:true
+    },
     reciever : {
-        type:mongoose.Schema.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId, 
         ref:"User"
     },
     chat : {
@@ -17,5 +21,5 @@ const messageModel = mongoose.Schema({
     timeStamp:true,
 });
 
-const Message = mongoose.Model("Message",messageModel);
+const Message = mongoose.model("Message",messageModel);
 module.exports=Message;
