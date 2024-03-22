@@ -29,7 +29,7 @@ const accessChat = asyncHandler(async (req, res) => {
   else {
       // if chat is empty then this error will be thrown
       res.status(400);
-      throw new Error(error.message);
+      throw new Error("Chat not found");
   }
 });
 
