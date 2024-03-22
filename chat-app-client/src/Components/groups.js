@@ -57,7 +57,8 @@ function Groups() {
         <div className='ug-list' id='grp-list'>
         {groups.map((group, index) => {
             return (
-              <div className={"list-item"} key={index} onClick={()=>{
+              <div className={"list-item"} key={index} >
+                {/*onClick={()=>{
                 const config={
                   headers:{
                     Authorization:`Bearer ${userData.data.token}`,
@@ -67,7 +68,7 @@ function Groups() {
                   chatId:group._id,
                   userId:userData.data._id,
                 },config);
-              }}>
+              }} */}
                 <p className={"con-icon"}>T</p>
                 <p className={"con-title"}>{group.chatName}</p>
               </div>
