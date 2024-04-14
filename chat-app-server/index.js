@@ -39,10 +39,11 @@ const server=app.listen(PORT,console.log("Server is Running"));
 const io=require("socket.io")(server,{
     cors:{
         origin:"*",
+        methods:["GET","POST"]
     },
     pingTimeout:60000
 });
-
+ 
 io.on("connection",(socket)=>{
     socket.on("setup",(user)=>{
         socket.join(user.data._id);
@@ -63,4 +64,17 @@ io.on("connection",(socket)=>{
             socket.in(user._id).emit("message recieved",newMessageRecieved);
         });
     });
+    socket.emit("me", socket.id);
+
+	socket.on("disconnect", () => {
+		socket.broadcast.emit("callEnded")
+	});
+
+	socket.on("callUser", ({ userToCall, signalData, from, name }) => {
+		io.to(userToCall).emit("callUser", { signal: signalData, from, name });
+	});
+
+	socket.on("answerCall", (data) => {
+		io.to(data.to).emit("callAccepted", data.signal)
+	});
 });

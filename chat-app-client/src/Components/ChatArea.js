@@ -110,7 +110,7 @@ function ChatArea() {
               variant="rectangular"
               sx={{ width: "100%", borderRadius: "10px" }}
               height={60}
-        />
+        /> 
       </div>
     );
   } else {

@@ -5,8 +5,9 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import VideoCallIcon from '@mui/icons-material/VideoCall';
 // import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
-import NightlightIcon from '@mui/icons-material/Nightlight';
+// import NightlightIcon from '@mui/icons-material/Nightlight';
 // import SearchIcon from '@mui/icons-material/Search';
 // import ConversationsItem from './ConversationsItem';
 import {useNavigate} from "react-router-dom";
@@ -56,9 +57,10 @@ function Sidebar() {
                     <AddCircleIcon />
                 </IconButton>
                 <IconButton>
-                    <NightlightIcon />
+                    {/* <NightlightIcon /> */}
                     {/* {lightTheme && <NightlightIcon />}
                     {!lightTheme && <LightModeRoundedIcon />} */}
+                    <VideoCallIcon onClick={()=>{navigate("video-call")}}/>
                 </IconButton>
             </div>
         </div>

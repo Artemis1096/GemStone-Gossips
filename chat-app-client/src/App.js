@@ -9,6 +9,7 @@ import Welcome from './Components/Welcome'
 import CreateGroups from './Components/CreateGroups'
 import UserGroups from './Components/User'
 import Groups from "./Components/groups";
+import VideoCall from './Components/VideoCall';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="users" element={<UserGroups/>}></Route>
             <Route path="groups" element={<Groups/>}></Route>
             <Route path="create-groups" element={<CreateGroups/>}></Route>
+            <Route path="video-call" element={<VideoCall/>}></Route>
           </Route>
       </Routes>
     </div>

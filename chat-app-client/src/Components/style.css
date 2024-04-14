@@ -112,6 +112,8 @@
     flex:0.7;
     display: flex;
     flex-direction: column;
+    overflow: scroll;
+    scrollbar-width: none;
 }
 
 .chatArea-header{
@@ -286,6 +288,8 @@
 /* Active Users */
 .list-container{
     flex: 0.7;
+    overflow: scroll;
+    scrollbar-width: none;
 }
 .ug-header{
     background-color: #fff;
@@ -378,4 +382,27 @@
     .login-text{
         font-size: 1.5rem;
     }
+}
+
+/* VideoChat Area */
+.video-chat-heading{
+    background: none;
+    margin-top: 1.5rem;
+    text-align: center;
+    color: white;
+}
+.video-box{
+    height: 18rem;
+    width: 24.5rem;
+}
+.video-align{
+    display: flex; 
+    margin-top: 2rem;   
+}
+.video-box-main{
+    margin: 2px;
+}
+.video-dialogbox{
+    width: 49.5rem;
+    margin-top: 1rem;
 }
