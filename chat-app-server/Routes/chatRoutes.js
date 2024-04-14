@@ -15,7 +15,7 @@ router.route('/',).post(protect,accessChat);
 router.route('/',).get(protect,fetchChats);
 router.route('/createGroups',).post(protect,createGroupChat);
 router.route('/fetchGroups',).get(protect,fetchGroups);
-// router.route('/groupExit',).put(protect,groupExit);
-// router.route('/addSelfToGroup',).put(protect,addSelfToGroup);
-
+router.route('/groupExit',).put(protect,groupExit);
+router.route('/addSelfToGroup',).put(protect,addSelfToGroup);
+ 
 module.exports = router;

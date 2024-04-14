@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "./style.css"
 import { IconButton } from '@mui/material';
 import axios from "axios";
-// import SearchIcon from '@mui/icons-material/Search';
 import logo from "../icons/chat.png";
 import {myContext} from "./MainContainer";
 import RefreshIcon from "@mui/icons-material/Refresh";

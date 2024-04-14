@@ -24,12 +24,27 @@ const accessChat = asyncHandler(async (req, res) => {
   });
 
   if (isChat.length > 0) {
-    res.send(isChat[0]);
+    res.send(isChat[0]); 
   } 
   else {
       // if chat is empty then this error will be thrown
-      res.status(400);
-      throw new Error("Chat not found");
+      var chatData = {
+        chatName: "sender",
+        isGroupChat: false,
+        users: [req.user._id, userId],
+      };
+  
+      try {
+        const createdChat = await Chat.create(chatData);
+        const FullChat = await Chat.findOne({ _id: createdChat._id }).populate(
+          "users",
+          "-password"
+        );
+        res.status(200).json(FullChat);
+      } catch (error) {
+        res.status(400);
+        throw new Error(error.message);
+      }
   }
 });
 

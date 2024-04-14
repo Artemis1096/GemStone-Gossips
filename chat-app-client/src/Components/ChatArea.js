@@ -10,7 +10,7 @@ import axios from "axios";
 import { myContext } from "./MainContainer";
 import io from "socket.io-client"
 
-const endpoint="https://localhost:8080";
+const endpoint="http://localhost:8080";
 var socket;
 
 function ChatArea() {
@@ -125,9 +125,6 @@ function ChatArea() {
               {chat_user}
             </p>
           </div>
-          {/* <IconButton className={"icon"}>
-            <DeleteIcon />
-          </IconButton> */}
           </div>
         <div className={"messages-container"}>
           {allMessages
