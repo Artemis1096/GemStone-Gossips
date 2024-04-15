@@ -10,7 +10,7 @@ import axios from "axios";
 import { myContext } from "./MainContainer";
 import io from "socket.io-client"
 
-const endpoint="http://localhost:8080";
+const endpoint="https://gemstone-gossips-devordie-mnnit.onrender.com";
 var socket;
 
 function ChatArea() {
